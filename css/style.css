@@ -5,22 +5,32 @@ Medium green: #55c57a
 Dark green: #28b485
 */
 
-* {
+*,
+*::after *::before {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: inherit;
+}
+
+:root {
+  --main-light: #7ed56f;
+  --main-medium: #55c57a;
+  --main-dark: #28b485;
+  --gray: #777;
+  --white: #fff;
 }
 
 html {
-  font-size: 10px;
+  font-size: 62.5%;
 }
 
 body {
   font-family: "lato", sans-serif;
   font-weight: 400;
   line-height: 1.7;
-  color: #777;
+  color: var(--gray);
   padding: 3rem;
+  box-sizing: border-box;
 }
 
 .header {
@@ -37,24 +47,24 @@ body {
   clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
 }
 
-.logo-box {
+.header__logo-box {
   position: absolute;
   top: 4rem;
   left: 4rem;
 }
 
-.logo {
+.header__logo {
   height: 3.5rem;
 }
 
 .heading-primary {
-  color: #fff;
+  color: var(--white);
   text-transform: uppercase;
   backface-visibility: hidden;
   margin-bottom: 6rem;
 }
 
-.heading-primary-main {
+.heading-primary--main {
   display: block;
   font-size: 6rem;
   font-weight: 400;
@@ -62,7 +72,7 @@ body {
   animation: moveInLeft 1s ease-out;
 }
 
-.heading-primary-sub {
+.heading-primary--sub {
   display: block;
   font-size: 2rem;
   font-weight: 700;
@@ -70,7 +80,7 @@ body {
   animation: moveInRight 1s ease-out;
 }
 
-.header_text-box {
+.header__text-box {
   position: absolute;
   top: 40%;
   left: 50%;
@@ -138,9 +148,9 @@ body {
   box-shadow: 0 0.5rem 1rem rgba(56, 41, 41, 0.2);
 }
 
-.btn-white {
-  background: #fff;
-  color: #777;
+.btn--white {
+  background: var(--white);
+  color: var(--gray);
 }
 
 .btn::after {
@@ -156,8 +166,8 @@ body {
   transition: all 0.4s;
 }
 
-.btn-white::after {
-  background-color: #fff;
+.btn--white::after {
+  background-color: var(--white);
 }
 
 .btn:hover::after {
@@ -165,7 +175,7 @@ body {
   opacity: 0;
 }
 
-.btn-animated {
+.btn--animated {
   animation: moveInBottom 0.5s ease-out 0.75s;
   animation-fill-mode: backwards;
 }
