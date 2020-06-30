@@ -453,13 +453,6 @@ body {
   transition: all 0.3s;
 }
 
-@media (max-width: 56.25em) {
-  .form__input {
-    width: 100%;
-    margin-bottom: 1rem;
-  }
-}
-
 .form__input:focus {
   outline: none;
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.8);
@@ -517,8 +510,8 @@ body {
 }
 
 .form__radio-button {
-  height: 2rem;
-  width: 2rem;
+  height: 3rem;
+  width: 3rem;
   border: 5px solid #55c57a;
   border-radius: 50%;
   display: inline-block;
@@ -738,7 +731,7 @@ body {
 }
 
 .popup {
-  height: 100vh;
+  height: 95vh;
   width: 100%;
   position: fixed;
   top: 0;
@@ -748,6 +741,13 @@ body {
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s;
+}
+
+@supports (backdrop-filter: blur(10px)) {
+  .popup {
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.3);
+  }
 }
 
 .popup__content {
@@ -868,32 +868,40 @@ body {
   clip-path: circle(50% at 50% 50%);
   transform: translateX(-3rem) skewX(12deg);
   position: relative;
+  overflow: hidden;
+  border-radius: 50%;
 }
 
-@media (max-width: 37.5em) {
+@supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
   .story__shape {
-    transform: translateX(-3rem) skewX(0);
+    clip-path: circle(50% at 50% 50%);
+    border-radius: none;
+  }
+  @media (max-width: 37.5em) {
+    .story__shape {
+      transform: translateX(-3rem) skewX(0);
+    }
   }
 }
 
-.story__image {
+.story__shape__image {
   height: 100%;
   transform: translateX(-4rem) scale(1.5);
   backface-visibility: hidden;
   transition: all 0.5s;
 }
 
-.story__text {
+.story__shape__text {
   transform: skewX(12deg);
 }
 
 @media (max-width: 37.5em) {
-  .story__text {
+  .story__shape__text {
     transform: skewX(0);
   }
 }
 
-.story__caption {
+.story__shape__caption {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -907,17 +915,17 @@ body {
   backface-visibility: hidden;
 }
 
-.story:hover .story__caption {
+.story__shape:hover .story__shape__caption {
   opacity: 1;
   transform: translate(-50%, -50%);
 }
 
-.story:hover .story__image {
+.story__shape:hover .story__shape__image {
   transform: translateX(-4rem) scale(1.1);
   filter: blur(3px) brightness(80%);
 }
 
-.story__button {
+.story__shape__button {
   margin: 0 auto;
 }
 
@@ -1010,17 +1018,31 @@ body {
 }
 
 .header {
-  height: 95vh;
-  background-image: linear-gradient(to right, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8)), url(../img/hero.jpg);
+  height: 85vh;
+  background-image: linear-gradient(to right, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8)), url(../img/hero-small.jpg);
   background-size: cover;
   background-position: top;
   position: relative;
   clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
 }
 
+@supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+  .header {
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    height: 95vh;
+  }
+}
+
+@media (min-resolution: 192dpi) and (min-width: 37.5em), (min-width: 125em) {
+  .header {
+    background-image: linear-gradient(to right, rgba(255, 185, 0, 0.8), rgba(255, 119, 48, 0.8)), url(../img/hero.jpg);
+  }
+}
+
 @media (max-width: 37.5em) {
   .header {
     height: 57vh;
+    margin-bottom: 4rem;
     clip-path: polygon(0 0, 100% 0, 100% 50vh, 0 100%);
   }
 }
@@ -1079,10 +1101,12 @@ body {
   margin-right: 6rem;
 }
 
-@media (max-width: 56.25em) {
-  .row [class^="col-"]:not(:last-child) {
-    margin-right: 0;
-    margin-bottom: 4rem;
+@media (max-width: 75em) {
+  .row [class^="col-"] {
+    width: 40% !important;
+    margin-right: 3rem;
+    margin-bottom: 8rem;
+    padding-left: 7rem;
   }
 }
 
@@ -1173,6 +1197,7 @@ body {
   top: 0;
   left: 0;
   z-index: 1500;
+  overflow: hidden;
   opacity: 0;
   width: 0;
   transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -1275,9 +1300,9 @@ body {
   margin-top: -20vh;
 }
 
-@media (max-width: 56.25em) {
+@media (max-width: 75em) {
   .section-about {
-    padding: 26rem 0;
+    padding: 15rem 0;
   }
 }
 
@@ -1305,7 +1330,7 @@ body {
   margin-top: -10rem;
 }
 
-@media (max-width: 56.25em) {
+@media (max-width: 75em) {
   .section-tours {
     padding: 15rem 0 10rem 0;
   }
